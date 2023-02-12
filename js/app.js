@@ -8,7 +8,76 @@ document.addEventListener('DOMContentLoaded', () => {
   const div = document.createElement('div');
   const filterLabel = document.createElement('label');
   const filterCheckBox = document.createElement('input');
+  /*request();
+  url = 'https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/';
+
+  function request(url) {
+    return new Promise(function (resolve, reject) {
+      const xhr = new XMLHttpRequest();
+      xhr.timeout = 2000;
+      xhr.onreadystatechange = function(e) {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.status);
+            alert("Algo salío mal. ¡Lo sentimos!");
+          }
+        }
+      };
+      xhr.ontimeout = function () {
+        reject('timeout')
+      };
+      xhr.open('get', url, true);
+      xhr.send();
+    });
+  }*/
+
+
+  getXML();
   
+  function getXML()
+  {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // Creo que esto no tiene por qué estar aquí
+    xhr.onreadystatechange = function()
+    {
+      console.log("hola1"); // Bua si es que no entra ni aqui xD
+      if (xhr.readyState == 4 && xhr.status == 200)
+      {
+        console.log("hola2");
+        xhr.send("https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/"); // not sure if send should have that or not 
+        // Tampoco estoy segura de si deberia ir aqui el xhr.send
+      }
+      else
+      {
+        alert("Algo salío mal. ¡Lo sentimos!");
+      }
+    }
+  }
+  /*
+  function request(url) {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.timeout = 2000;
+    xhr.onreadystatechange = function(e) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          reject(xhr.status);
+        }
+      }
+    };
+    xhr.ontimeout = function () {
+      reject('timeout')
+    };
+    xhr.open('get', url, true);
+    xhr.send();
+  });
+}
+  */
+
   filterLabel.textContent = "Ocultar los que no hayan respondido";
   filterCheckBox.type = 'checkbox';
   div.appendChild(filterLabel);
