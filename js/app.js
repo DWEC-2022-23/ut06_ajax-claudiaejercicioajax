@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const div = document.createElement('div');
   const filterLabel = document.createElement('label');
   const filterCheckBox = document.createElement('input');
+
   /*request();
   url = 'https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/';
 
@@ -33,13 +34,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }*/
 
+quefuncione(); // obviamente cambiarle el nombre
 
-  getXML();
+function quefuncione() // y aqui tambien
+{
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function()
+  {
+    if (this.readyState == 4 && this.status == 200)
+    {
+      var objeto = JSON.parse(this.responseText);
+      xhr.open("GET", objeto, true);
+    }
+    else
+    {
+      alert("Algo salió mal. ¡Lo sentimos!")
+    }
+  }
+  xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true);
+  //xhr.responseType = 'json'; 
+  //var text = JSON.parse(xhr.responseText); // How do I make this work?? I think it has to be within the readystate and the status thingy
+  //console.log(text);
+  xhr.send();
+}
+
+  /*getXML();
   
   function getXML()
   {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // Creo que esto no tiene por qué estar aquí
     xhr.onreadystatechange = function()
     {
       console.log("hola1"); // Bua si es que no entra ni aqui xD
@@ -54,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Algo salío mal. ¡Lo sentimos!");
       }
     }
-  }
+    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // Creo que esto no tiene por qué estar aquí
+  }*/
+
+
   /*
   function request(url) {
   return new Promise(function (resolve, reject) {
