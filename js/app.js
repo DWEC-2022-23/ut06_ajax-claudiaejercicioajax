@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resolve(xhr.response);
           } else {
             reject(xhr.status);
-            alert("Algo salío mal. ¡Lo sentimos!");
+            alert("Algo salió mal. ¡Lo sentimos!");
           }
         }
       };
@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }*/
 
-quefuncione(); // obviamente cambiarle el nombre
+getXML(); 
 
-function quefuncione() // y aqui tambien
+function getXML()
 {
   var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true);
   xhr.onreadystatechange = function()
   {
     if (this.readyState == 4 && this.status == 200)
@@ -51,13 +52,11 @@ function quefuncione() // y aqui tambien
       alert("Algo salió mal. ¡Lo sentimos!")
     }
   }
-  xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true);
   //xhr.responseType = 'json'; 
   //var text = JSON.parse(xhr.responseText); // How do I make this work?? I think it has to be within the readystate and the status thingy
   //console.log(text);
   xhr.send();
 }
-
   /*getXML();
   
   function getXML()
@@ -80,9 +79,7 @@ function quefuncione() // y aqui tambien
     xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // Creo que esto no tiene por qué estar aquí
   }*/
 
-
-  /*
-  function request(url) {
+/*function request(url) {
   return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
     xhr.timeout = 2000;
@@ -102,7 +99,7 @@ function quefuncione() // y aqui tambien
     xhr.send();
   });
 }
-  */
+*/
 
   filterLabel.textContent = "Ocultar los que no hayan respondido";
   filterCheckBox.type = 'checkbox';
@@ -205,12 +202,3 @@ function quefuncione() // y aqui tambien
     }
   });  
 });  
-  
-  
-  
-  
-  
-  
-  
-  
-  
