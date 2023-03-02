@@ -53,13 +53,14 @@ server.listen(port, hostname, () => {
   function getXML()
   {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true);
+    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // esto no habría que cambiarlo??
     xhr.onreadystatechange = function()
     {
       if (this.readyState == 4 && this.status == 200)
       {
         var objeto = JSON.parse(this.responseText);
         xhr.open("GET", objeto, true);
+        // if that doesn't work try: console.log(xhr.response);
       }
       else
       {
