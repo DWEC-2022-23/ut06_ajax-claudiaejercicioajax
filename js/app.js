@@ -1,3 +1,5 @@
+var arrayInvitados = new Array();
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('registrar');
     const input = form.querySelector('input');
@@ -9,112 +11,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterLabel = document.createElement('label');
     const filterCheckBox = document.createElement('input');
 
-/*const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 5000;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-})
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at port : ${port}`);
-})
-*/ // ESTO QUE NI SE SI FUNCIONA
-  
-    /*request();
-    url = 'https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/';
-    function request(url) {
-      return new Promise(function (resolve, reject) {
-        const xhr = new XMLHttpRequest();
-        xhr.timeout = 2000;
-        xhr.onreadystatechange = function(e) {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              resolve(xhr.response);
-            } else {
-              reject(xhr.status);
-              alert("Algo salió mal. ¡Lo sentimos!");
-            }
-          }
-        };
-        xhr.ontimeout = function () {
-          reject('timeout')
-        };
-        xhr.open('get', url, true);
-        xhr.send();
-      });
-    }*/
-  
   getXML(); 
   
   function getXML()
   {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // esto no habría que cambiarlo??
+    xhr.open("GET", "http://localhost:3000/invitados", true);
     xhr.onreadystatechange = function()
     {
       if (this.readyState == 4 && this.status == 200)
       {
-        var objeto = JSON.parse(this.responseText);
-        xhr.open("GET", objeto, true);
-        // if that doesn't work try: console.log(xhr.response);
-      }
-      else
-      {
-        alert("Algo salió mal. ¡Lo sentimos!")
+        let datos = JSON.parse(xhr.response);
+        for (let item of datos)
+        {
+          arrayInvitados.push(item);
+          let mostrarLista = createLI(item.nombre, item.confirmado);
+          ul.appendChild(mostrarLista);
+        }
       }
     }
-    //xhr.responseType = 'json'; 
-    //var text = JSON.parse(xhr.responseText); // How do I make this work?? I think it has to be within the readystate and the status thingy
-    //console.log(text);
     xhr.send();
   }
-    /*getXML();
-    
-    function getXML()
-    {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function()
-      {
-        console.log("hola1"); // Bua si es que no entra ni aqui xD
-        if (xhr.readyState == 4 && xhr.status == 200)
-        {
-          console.log("hola2");
-          xhr.send("https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/"); // not sure if send should have that or not 
-          // Tampoco estoy segura de si deberia ir aqui el xhr.send
-        }
-        else
-        {
-          alert("Algo salío mal. ¡Lo sentimos!");
-        }
-      }
-      xhr.open("GET", "https://my-json-server.typicode.com/DWEC-2022-23/ut06_ajax-claudiaejercicioajax/", true); // Creo que esto no tiene por qué estar aquí
-    }*/
-  
-  /*function request(url) {
-    return new Promise(function (resolve, reject) {
-      const xhr = new XMLHttpRequest();
-      xhr.timeout = 2000;
-      xhr.onreadystatechange = function(e) {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            resolve(xhr.response);
-          } else {
-            reject(xhr.status);
-          }
-        }
-      };
-      xhr.ontimeout = function () {
-        reject('timeout')
-      };
-      xhr.open('get', url, true);
-      xhr.send();
-    });
-  }
-  */
   
     filterLabel.textContent = "Ocultar los que no hayan respondido";
     filterCheckBox.type = 'checkbox';
